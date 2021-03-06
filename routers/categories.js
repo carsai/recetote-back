@@ -7,6 +7,7 @@ const {
   deleteCategory,
 } = require('../controller/categories');
 const { validarCampos } = require('../middleware/validarCampos');
+const { checkOneFicherosImg } = require('../middleware/checkFicheros');
 
 const router = express.Router();
 
@@ -14,11 +15,24 @@ router.get('/', getAllCategories);
 
 router.put(
   '/',
-  [check('nombre', 'Es obligatorio').toUpperCase().notEmpty(), validarCampos],
+  [
+    check('name', 'Es obligatorio').toUpperCase().trim().notEmpty(),
+    checkOneFicherosImg('img'),
+    validarCampos,
+  ],
   createCategory,
 );
 
-router.post('/:id', updateCategory);
+router.post(
+  '/',
+  [
+    check('id', 'Es obligatorio').notEmpty(),
+    check('name', 'Es obligatorio').toUpperCase().trim().notEmpty(),
+    checkOneFicherosImg('img'),
+    validarCampos,
+  ],
+  updateCategory,
+);
 
 router.delete('/:id', deleteCategory);
 
