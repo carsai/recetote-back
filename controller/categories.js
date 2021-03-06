@@ -1,32 +1,32 @@
-const Category = require('../models/category')
+const Category = require('../models/category');
 
 /**
  *
  * @type import('express').RequestHandler
  */
 const getAllCategories = async (_req, res) => {
-  const categories = await Category.find()
+  const categories = await Category.find();
 
   res.json({
     ok: true,
-    categories
-  })
-}
+    categories,
+  });
+};
 
 /**
  *
  * @type import('express').RequestHandler
  */
 const createCategory = async (req, res) => {
-  const category = new Category(req.body)
+  const category = new Category(req.body);
 
-  const categoryDB = await category.save()
+  const categoryDB = await category.save();
 
   res.json({
     ok: true,
-    category: categoryDB
-  })
-}
+    category: categoryDB,
+  });
+};
 
 /**
  *
@@ -35,9 +35,9 @@ const createCategory = async (req, res) => {
 const updateCategory = (req, res) => {
   res.json({
     ok: true,
-    api: `updateCategory ${req.params.id}`
-  })
-}
+    api: `updateCategory ${req.params.id}`,
+  });
+};
 
 /**
  *
@@ -46,13 +46,13 @@ const updateCategory = (req, res) => {
 const deleteCategory = (req, res) => {
   res.json({
     ok: true,
-    api: `deleteCategory ${req.params.id}`
-  })
-}
+    api: `deleteCategory ${req.params.id}`,
+  });
+};
 
 module.exports = {
   getAllCategories,
   createCategory,
   updateCategory,
-  deleteCategory
-}
+  deleteCategory,
+};

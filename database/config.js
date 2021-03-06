@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Console = require('Console');
 
 const dbConnection = async () => {
   try {
@@ -6,16 +7,16 @@ const dbConnection = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
-      useFindAndModify: false
-    })
+      useFindAndModify: false,
+    });
 
-    console.log('Conectado a MongoDB')
+    Console.success('Conectado a MongoDB');
   } catch (error) {
-    console.log(error)
-    throw new Error('Error al conectar a la base de datos')
+    Console.error(error);
+    throw new Error('Error al conectar a la base de datos');
   }
-}
+};
 
 module.exports = {
-  dbConnection
-}
+  dbConnection,
+};
