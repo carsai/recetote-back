@@ -27,7 +27,7 @@ router.post(
   '/',
   [
     check('id', 'Es obligatorio').notEmpty(),
-    check('name', 'Es obligatorio').toUpperCase().trim().notEmpty(),
+    check('name', 'Es obligatorio').toUpperCase().trim(),
     checkOneFicherosImg('img'),
     validarCampos,
   ],

@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "select test",
+            "type": "shell",
+            "command": "node_modules/.bin/jest -t --findRelatedTests ${input:test}",
+            "problemMatcher": [],
+        },
+    ],
+    "inputs": [
+        {
+            "id": "test",
+            "description": "test a ejecutar",
+            "options": [
+                "ingredients.test.js",
+                "categories.test.js",
+            ],
+            "type": "pickString"
+        }
+    ]
+}

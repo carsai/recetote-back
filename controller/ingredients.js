@@ -24,6 +24,15 @@ const getAllIngredients = async (_req, res) => {
  */
 const createIngredient = async (req, res) => {
   try {
+    if (req.fileVal) {
+      const base64img = req.fileVal.buffer.toString('base64');
+
+      req.body = {
+        ...req.body,
+        image: base64img,
+      };
+    }
+
     const ingredient = new Ingredient(req.body);
 
     const ingredientDB = await ingredient.save();
@@ -33,6 +42,13 @@ const createIngredient = async (req, res) => {
       ingredient: ingredientDB,
     });
   } catch (error) {
+    if (error.code && error.code === 11000) {
+      return res.status(400).json({
+        ok: false,
+        message: 'El ingrediente ya existe',
+      });
+    }
+
     return res.status(500).json({
       ok: false,
       error,
@@ -69,6 +85,13 @@ const updateIngredient = async (req, res) => {
       ingredient: newIngredient,
     });
   } catch (error) {
+    if (error.code && error.code === 11000) {
+      return res.status(400).json({
+        ok: false,
+        message: 'El ingrediente ya existe',
+      });
+    }
+
     return res.status(500).json({
       ok: false,
       error,
